@@ -15,7 +15,14 @@ export default createStore({
       state.blogPosts.push(post);
     },
     UPDATE_POST: (state, post) => {
-      state.blogPosts[post.id] = post;
+      //Ищем индекс элемента массива blogPost, значение свойства id  которого равно значению свойства id полученного объекта post
+      const index = state.blogPosts
+        .map((statePost) => {
+          return statePost.id;
+        })
+        .indexOf(post.id);
+      //Перезаписываем элемент с найденным индексом
+      state.blogPosts[index] = post;
     },
     DELETE_POST_FROM_STATE: (state, postID) => {
       state.blogPosts = state.blogPosts.filter((post) => post.id != postID);
